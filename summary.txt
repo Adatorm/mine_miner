@@ -1,0 +1,48 @@
+                    summary
+
+-shared memory her kullanımda azalıyor
+
+-pending durumu oluştuğunda mesela mine da 70 entity varsa ve miner 90
+istiyorsa miner 70 tanesini alıyor işlemeden pending durumuna geçiyor
+
+-pending durumunda beklemesi için pause fonksiyonunu kullandım
+
+-eğer bir miner directory bulup onu bildirirse,en az entity isteyen miner ile
+yeni entity size ını karşılaştırıyor,eğer size yeterliyse ilgili miner ı 
+SIGUSR1 ile uyandırıyor.
+
+-mine nin entity listesi shared memory de kullanıldı,geri kalan data
+transferleri fifolar ile sağlandı.
+
+-shared memory senkronizasyonu için semaphore kullanıldı.
+
+-shared memory kullanırken 2 tane shared memory segmenti olusturdum.birincisi
+bilindik bir int tutuyor,2. si dinamik olacagı için 2. shared memory nin size 
+bilgisini 1. shared memory de tuttum ve işlemlerimi de o şekilde ilerlettim.
+
+-benzer kullanımı miner thread lerin word arraylarinde kullandım,0. index elemanı
+size bilgisini tutuyor.
+
+-process lerin haberleşmesi için bir while döngüsünde bir fifoyu read ile 
+dinlettim.(sinyallerle uyutmaya çalıştım bir türlü halledemedim)
+
+-mine ctrl+c sinyalini alınca ilgili miner ları da ctrl+c ile kapatıyor ve
+log filelerine ctrl+c alındığı yazıyor.
+
+-miner ların log fileleri "<processid>-clientlog.txt" şeklinde oluşturuldu.
+
+-seg fault gelebilcek durumlarda shared memory ler silinmiyor olabilir,
+program tekrar açılıp ctrl+c yapınca bunların silinmesi gerekiyor.
+
+-memory leakleri kontrol ettim,
+
+-programları sadece bir dosya içeren,sadece boş bir klasör içeren,bir klasör
+içinde yine klasör vb. durumları test ettim.
+
+-kelimeleri tam kurallı olarak almıyor olabilir ( virgul) 
+
+
+Guner Acet 
+
+
+
